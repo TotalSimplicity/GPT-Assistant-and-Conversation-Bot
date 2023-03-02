@@ -10,5 +10,6 @@ sudo apt install portaudio19-dev
 
 pip install pyaudio
 
-To run(Adding flags for terminal based mode only soon):
-python main.py
+To run:
+
+python main.py nogui or python main.py gui
