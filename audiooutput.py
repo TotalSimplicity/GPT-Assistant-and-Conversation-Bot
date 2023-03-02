@@ -1,7 +1,6 @@
 import os
 import boto3 as b3
 import config as cnf
-import gui
 
 
 os.environ['AWS_ACCESS_KEY_ID'] = cnf.aws_access_key_id
