@@ -1,12 +1,16 @@
 import easygui
 import audiooutput as ao
 
+
 # Ask for the user's favorite color
 aiChoices = ["Assistant", "Conversationalist", "DebateThing"]
 aiChoice = easygui.buttonbox("Choose an AI type.", choices=aiChoices)
 
+
 if aiChoice == "Assistant" or aiChoice == "Conversationalist":
-   ao.setvoice
+   ao.set_voice("british")
+elif aiChoice == "DebateThing":
+   ao.set_voice("indian")
 
 # Ask the user if they like pizza
 #inputChoices = ["Yes", "No"]
