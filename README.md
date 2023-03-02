@@ -12,4 +12,4 @@ pip install pyaudio
 
 To run:
 
-python main.py nogui or python main.py gui
+python main.py [nogui/gui] [assistant/conversation/debate]
