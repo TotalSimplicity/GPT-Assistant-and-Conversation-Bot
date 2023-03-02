@@ -12,10 +12,19 @@ if aiChoice == "Assistant" or aiChoice == "Conversationalist":
 elif aiChoice == "DebateThing":
    ao.set_voice("indian")
 
-# Ask the user if they like pizza
-#inputChoices = ["Yes", "No"]
-#inputChoice = easygui.ynbox("Do you want to start in debug mode(Text input as opposed to voice input)?", choices=inputChoices)
+inputChoices = ["Yes", "No"]
+inputChoice = easygui.ynbox("Do you want to override the default voice for your chosen AI?", choices=inputChoices)
+
+if inputChoice == "Yes":
+   voiceChoices = ["British", "Indian"]
+   voiceChoice = easygui.buttonbox("Do you want to override the default voice for your chosen AI?", choices=inputChoices)
+   if voiceChoice == "British":
+      ao.set_voice("british")
+   elif voiceChoice == "Indian":
+      ao.set_voice("indian")
+      
+ finalMessage = r"Starting {aiChoice}......"
 
  # Display the user's answers
-easygui.msgbox("Settings set", ok_button="Start")
+easygui.msgbox(finalMessage, ok_button="Start")
 
