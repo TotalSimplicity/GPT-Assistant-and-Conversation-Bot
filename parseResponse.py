@@ -1,5 +1,4 @@
 import webbrowser
-import gettime as tm
 import music as ms
 import secrets
 
@@ -22,7 +21,7 @@ def special_instructions(response):
     if "*volume full*" in response.lower():
         ms.changeVolume(100)
     if "*time*" in response.lower():
-        tm.get_time()
+        print("Time is disabled")
 
 def clear_substrings(response):
     newResponse = response.replace("*browser*", "")
