@@ -9,19 +9,30 @@ from gtts import gTTS
 from playsound import playsound
 import audiooutput as ao
 import config as cnf
-import gui
 import music as ms
 import parseResponse as pr
 
 arguone = int(sys.argv[1])
 argutwo = int(sys.argv[2])
 
+if arguone == "gui":
+    import gui
+    aiType = gui.aiChoice
+elif arguone == "nogui":
+    if arguetwo == "assistant":
+        aiType = "assistant"
+    elif arguetwo == "conversation":
+        aiType = "conversationalist"
+    elif arguetwo == "debate":
+        aiType = "debatething"
+    else:
+        aiType = input("Pick an AI type, Assistant, Conversationalist, or Debatething")
+
 openai.api_key = cnf.api
 r = sr.Recognizer()
 r.dynamic_energy_threshold = False
 
-aiType = gui.aiChoice
-fullAIType = aiType
+
 now = datetime.now()
 current_time = now.strftime("%H:%M")
 
