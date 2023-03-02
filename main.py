@@ -12,6 +12,7 @@ import config as cnf
 import music as ms
 import parseResponse as pr
 
+
 aiType = "undefined"
 try:
     programname = sys.argv[0]
@@ -39,7 +40,7 @@ elif arguone == "nogui":
     else:
         aiType = input("Pick an AI type, Assistant, Conversationalist, or Debatething")
 else:
-    print("No arguements found, please start with flags of either \"nogui\" or \"gui\"")
+    print("No arguments found, please start with flags of either \"nogui\" or \"gui\"")
 
 openai.api_key = cnf.api
 r = sr.Recognizer()
@@ -80,6 +81,12 @@ else:
     print("Invalid input type, killing program.")
     time.sleep(2)
     exit()
+
+#Create the prompt from the user input
+if aiType == 1:
+    aiTitle = "AI"
+elif aiType == 2 or aiType == 3:
+    aiTitle = "Human 2"
 #Query OpenAI with prompt and the history
 def generate_response(prompt, history=[]):
     prompt_with_history = f"\n".join(history + [prompt])
@@ -126,7 +133,7 @@ with open("history.txt", "a") as file:
         # Write the string to a new line in the file
         file.write("\nNEW CONVO STARTED WITH AI TYPE " + str(aiType) + "\n")
 
-
+historyFile = f"{aiType}history.txt"
 history = []
 while True:
     #Check what input type is being used and call it
@@ -135,19 +142,16 @@ while True:
     elif inputType == 2:
         user_input = get_input_debug()
     
-    #Create the prompt from the user input
-    if aiType == 1:
-        prompt = backstory + f"Human: {user_input}\nAI:"
-    elif aiType == 2 or aiType == 3:
-        prompt = backstory + f"Human: {user_input}\nHuman 2:"
     
+    
+    prompt = backstory + f"Human: {user_input}\n{aiTitle}:"
     #Generate response and append to the history list
     response = generate_response(prompt, history)
     history.append(prompt)
     history.append(response)
     
     #Save users input and the AI's response to the history
-    with open("history.txt", "a") as file:
+    with open(historyFile, "a") as file:
         file.write("User " + current_time + " : " + user_input + "\n")
         file.write("AI " + current_time + " : " + response + "\n")
     
