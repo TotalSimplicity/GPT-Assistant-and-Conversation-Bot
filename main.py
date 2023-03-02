@@ -16,7 +16,7 @@ openai.api_key = cnf.api
 r = sr.Recognizer()
 r.dynamic_energy_threshold = False
 now = datetime.now()
-current_time = now.strftime("%H:%M")
+current_time = now.strftime("%m/%d/%Y %H:%M:%S")
 inputType = 1
 
 # Get arguments
@@ -125,7 +125,7 @@ def get_input():
 # Save out
 with open("history.txt", "a") as file:
 
-        file.write("\nNEW CONVO STARTED WITH AI TYPE " + str(aiType) + "\n")
+        file.write(current_time + "\nNEW CONVO STARTED WITH AI TYPE " + str(aiTypeName) + "\n")
 
 historyFile = f"{aiTypeName}history.txt"
 history = []
@@ -141,8 +141,8 @@ while True:
     history.append(response)
     
     with open(historyFile, "a") as file:
-        file.write("User " + current_time + " : " + user_input + "\n")
-        file.write("AI " + current_time + " : " + response + "\n")
+        file.write("User: " + user_input + "\n")
+        file.write("AI: " + response + "\n")
     
     pr.special_instructions(response)
     response = pr.clear_substrings(response)
