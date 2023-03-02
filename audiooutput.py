@@ -9,11 +9,14 @@ os.environ['AWS_SECRET_ACCESS_KEY'] = cnf.aws_secret_key
 # Create a client for the Amazon Polly service
 polly = b3.client('polly', region_name='us-east-1')
 
-def speak_response(response):
-    if gui.aiChoice == "conversationalist" or gui.aiChoice == "Assistant":
+def set_voice(voice):
+    if voice == "british":
         voice_id = 'Arthur'
-    if gui.aiChoice == "DebateThing":
+    elif voice == "indian":
         voice_id = 'Kajal'
+
+def speak_response(response):
+  
     # Generate the speech using Amazon Polly
     response = polly.synthesize_speech(Text=response, OutputFormat='mp3', VoiceId=voice_id, Engine="neural")
     # Save the speech as an audio file
