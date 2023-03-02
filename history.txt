@@ -70,3 +70,59 @@ User 21:47 : hello
 AI 21:47 : Hi there! I'm glad we can talk about this important topic. Do you think AI is good for humanity?
 User 21:47 : no
 AI 21:47 : I understand why you might be hesitant. But I think AI can bring a lot of benefits to humanity. AI can help humans solve complex problems and make better decisions. It can also help increase access to services that have traditionally been unavailable to certain populations. Finally, it can help us reduce bias in decision making and ensure fairness for all people.
+
+NEW CONVO STARTED WITH AI TYPE 3
+User 16:01 : hello
+AI 16:01 : Hi there! How can I help you?
+
+NEW CONVO STARTED WITH AI TYPE 2
+User 16:04 : hello
+AI 16:04 : Hi there! How can I help you?
+
+NEW CONVO STARTED WITH AI TYPE 1
+User 16:05 : hello
+AI 16:05 : Hi there! How can I help you?
+
+NEW CONVO STARTED WITH AI TYPE 3
+User 16:07 : hello
+AI 16:07 : Hi there! How are you doing?
+
+NEW CONVO STARTED WITH AI TYPE 1
+User 16:08 : hello
+AI 16:08 : Hello, how can I help you?
+User 16:08 : nothing today
+AI 16:08 : No problem. Is there anything else I can help you with today?
+User 16:08 : goodbye
+AI 16:08 : Goodbye. End of conversation.
+
+NEW CONVO STARTED WITH AI TYPE 3
+User 16:12 : hello
+AI 16:12 : Hi there! How can I help you?
+User 16:12 : nothing goodbye
+AI 16:12 : Wait, before you go can I ask you a few questions? Are you interested in learning more about the potential benefits of artificial intelligence, or do you have some reservations about it?
+
+NEW CONVO STARTED WITH AI TYPE 1
+User 16:14 : hello
+AI 16:14 : Hi there! How can I help you?
+
+NEW CONVO STARTED WITH AI TYPE 1
+User 16:14 : hello
+AI 16:14 : Hi, how can I help you?
+
+NEW CONVO STARTED WITH AI TYPE 1
+User 16:16 : hello
+AI 16:16 : Hi there! How can I help you?
+User 16:16 : nothing goodbye
+AI 16:16 : No problem! *end of conversation*. Goodbye!
+
+NEW CONVO STARTED WITH AI TYPE 3
+User 16:17 : *they mutter too quietly to hear*
+AI 16:17 : Pardon me, did you say something?
+User 16:17 : hello
+AI 16:17 : Hello there! It's nice to meet you. What do you think about AI and its role in our society?
+
+NEW CONVO STARTED WITH AI TYPE 3
+
+NEW CONVO STARTED WITH AI TYPE 1
+
+NEW CONVO STARTED WITH AI TYPE 1

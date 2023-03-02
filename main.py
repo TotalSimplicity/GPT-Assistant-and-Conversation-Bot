@@ -12,23 +12,34 @@ import config as cnf
 import music as ms
 import parseResponse as pr
 
-arguone = int(sys.argv[1])
-argutwo = int(sys.argv[2])
+aiType = "undefined"
+try:
+    programname = sys.argv[0]
+    arguone = sys.argv[1]
+    argutwo = sys.argv[2]
+except IndexError:
+    aitype = "undefined"
 
 if arguone == "gui":
     import gui
     aiType = gui.aiChoice
+elif arguone == "gui" and argutwo is not None:
+    print("The argument \"gui\" does not require any other arguments")
+    exit()
 elif arguone == "nogui":
-    if arguetwo == "assistant":
+    if argutwo == "assistant":
         aiType = "assistant"
-    elif arguetwo == "conversation":
+        ao.voice_id = ao.set_voice("british")
+    elif argutwo == "conversation":
         aiType = "conversationalist"
-    elif arguetwo == "debate":
+        ao.voice_id = ao.set_voice("british")
+    elif argutwo == "debate":
         aiType = "debatething"
+        ao.voice_id = ao.set_voice("indian")
     else:
         aiType = input("Pick an AI type, Assistant, Conversationalist, or Debatething")
 else:
-    print("No arguements found, please start with flags of either \"nogui\" or \"gui\")
+    print("No arguements found, please start with flags of either \"nogui\" or \"gui\"")
 
 openai.api_key = cnf.api
 r = sr.Recognizer()

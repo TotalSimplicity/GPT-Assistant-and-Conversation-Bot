@@ -14,19 +14,15 @@ elif aiChoice == "DebateThing":
 
 # Ask if the user wants to change the voice
 inputChoices = ["Yes", "No"]
-inputChoice = easygui.ynbox("Do you want to override the default voice for your chosen AI?", choices=inputChoices)
+inputChoice = easygui.buttonbox("Do you want to override the default voice for your chosen AI?", choices=inputChoices)
 
 # If yes, then get the wanted voice
 if inputChoice == "Yes":
    voiceChoices = ["British", "Indian"]
-   voiceChoice = easygui.buttonbox("Do you want to override the default voice for your chosen AI?", choices=inputChoices)
+   voiceChoice = easygui.buttonbox("Pick a voice.", choices=voiceChoices)
    if voiceChoice == "British":
       ao.voice_id = ao.set_voice("british")
    elif voiceChoice == "Indian":
       ao.voice_id = ao.set_voice("indian")
-      
-finalMessage = f"Starting {aiChoice}......"
-
-# Display the user's answers
-easygui.msgbox(finalMessage, ok_button="Start")
+   
 
