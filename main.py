@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 import time
 from datetime import datetime
@@ -11,6 +12,9 @@ import config as cnf
 import gui
 import music as ms
 import parseResponse as pr
+
+arguone = int(sys.argv[1])
+argutwo = int(sys.argv[2])
 
 openai.api_key = cnf.api
 r = sr.Recognizer()
