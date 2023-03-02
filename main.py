@@ -16,8 +16,8 @@ openai.api_key = cnf.api
 r = sr.Recognizer()
 r.dynamic_energy_threshold = False
 
-aiType = gui.startup_gui()
-
+aiType = gui.aiChoice
+fullAIType = aiType
 now = datetime.now()
 current_time = now.strftime("%H:%M")
 
@@ -52,7 +52,6 @@ else:
     print("Invalid input type, killing program.")
     time.sleep(2)
     exit()
-
 #Query OpenAI with prompt and the history
 def generate_response(prompt, history=[]):
     prompt_with_history = f"\n".join(history + [prompt])
@@ -131,7 +130,7 @@ while True:
     #Change CMD printing based off of the AI type
     if aiType == 1:
         print("AI: " + response + "\n")    
-    elif aiType == 2:
+    elif aiType == 2 or aiType == 3:
         print("Human 2: " + response + "\n")    
     
     #Create the tts file, play it, then delete it
