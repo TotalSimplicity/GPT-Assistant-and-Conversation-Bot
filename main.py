@@ -27,6 +27,8 @@ elif arguone == "nogui":
         aiType = "debatething"
     else:
         aiType = input("Pick an AI type, Assistant, Conversationalist, or Debatething")
+else:
+    print("No arguements found, please start with flags of either \"nogui\" or \"gui\")
 
 openai.api_key = cnf.api
 r = sr.Recognizer()
