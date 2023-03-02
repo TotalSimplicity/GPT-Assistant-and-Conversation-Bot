@@ -1,7 +1,6 @@
 import os
 import sys
 import time
-import time
 from datetime import datetime
 import openai
 import speech_recognition as sr
@@ -13,7 +12,14 @@ import music as ms
 import parseResponse as pr
 
 
-aiType = "undefined"
+openai.api_key = cnf.api
+r = sr.Recognizer()
+r.dynamic_energy_threshold = False
+now = datetime.now()
+current_time = now.strftime("%H:%M")
+inputType = 1
+
+# Get arguments
 try:
     programname = sys.argv[0]
     arguone = sys.argv[1]
@@ -21,73 +27,63 @@ try:
 except IndexError:
     aitype = "undefined"
 
-if arguone == "gui":
-    import gui
-    aiType = gui.aiChoice
-elif arguone == "gui" and argutwo is not None:
+# Check arguments and set variables
+if arguone == "gui" and argutwo is not None:
     print("The argument \"gui\" does not require any other arguments")
     exit()
+elif arguone == "gui":
+    import gui
+    aiType = gui.aiChoice
 elif arguone == "nogui":
     if argutwo == "assistant":
         aiType = "assistant"
-        ao.voice_id = ao.set_voice("british")
+        
     elif argutwo == "conversation":
         aiType = "conversationalist"
-        ao.voice_id = ao.set_voice("british")
+        
     elif argutwo == "debate":
         aiType = "debatething"
-        ao.voice_id = ao.set_voice("indian")
+        
     else:
-        aiType = input("Pick an AI type, Assistant, Conversationalist, or Debatething")
+        aiType = input("Pick an AI type, Assistant, Conversationalist, or Debatething\n")
+        if aiType.lower() != "assistant" and aiType.lower() != "assistant" and aiType.lower() != "assistant":
+            print("Error, that is not a valid AI type.")
+            exit()
+        if argutwo == "text":
+            inputType = 2
 else:
     print("No arguments found, please start with flags of either \"nogui\" or \"gui\"")
-
-openai.api_key = cnf.api
-r = sr.Recognizer()
-r.dynamic_energy_threshold = False
-
-
-now = datetime.now()
-current_time = now.strftime("%H:%M")
-
-'''
-#console stuff only
-inputType = input("Pick input type, Voice or Text\n")
-if inputType.lower() == "voice":
-    inputType = 1
-elif inputType.lower() == "text":
-    inputType = 2
-else:
-    print("Invalid input type, killing program.")
-    time.sleep(2)
     exit()
 
-aiType = input("Pick AI type, conversationalist or assistant\n")
-'''
-inputType = 1
+aiTypeName = aiType
 
 
-#Check for AI type selection
+
+
+
 if aiType.lower() == "assistant":
     aiType = 1
     backstory = cnf.good + "\n" + cnf.instructs
+    ao.voice_id = ao.set_voice("british")
 elif aiType.lower() == "conversationalist":
     aiType = 2
     backstory = cnf.conversation + "\n"
+    ao.voice_id = ao.set_voice("british")
 elif aiType.lower() == "debatething":
     aiType = 3
     backstory = cnf.debatething + "\n"
+    ao.voice_id = ao.set_voice("indian")
 else:
     print("Invalid input type, killing program.")
     time.sleep(2)
     exit()
 
-#Create the prompt from the user input
+
 if aiType == 1:
     aiTitle = "AI"
 elif aiType == 2 or aiType == 3:
     aiTitle = "Human 2"
-#Query OpenAI with prompt and the history
+
 def generate_response(prompt, history=[]):
     prompt_with_history = f"\n".join(history + [prompt])
     response = openai.Completion.create(
@@ -103,73 +99,62 @@ def generate_response(prompt, history=[]):
     return response.choices[0].text.strip()
 
 
-#Get the voice input from the user(default method)
 def get_input():
-    with sr.Microphone() as source:
-        r.adjust_for_ambient_noise(source, duration=0.7)
-        print("Waiting for speech....")
-        audio = r.listen(source, timeout=None)
-
-    # recognize speech using Google Speech Recognition
-    try:
-        user_input = r.recognize_google(audio, language="en-US")
-    except sr.UnknownValueError:
-        print("Could not understand audio")
-        user_input = "*they mutter too quietly to hear*"
-    except sr.RequestError as e:
-        print("Could not request results from Google Speech Recognition service; {0}".format(e))
-        user_input = "*unintelligible sounds come from human*"
-    return user_input
-
-
-#Get text input for debugging/testing
-def get_input_debug():
-    user_input = input("Human: ")
-    return user_input
+    if inputType == 1:
+        with sr.Microphone() as source:
+            r.adjust_for_ambient_noise(source, duration=0.7)
+            print("Waiting for speech....")
+            audio = r.listen(source, timeout=None)
+        try:
+            user_input = r.recognize_google(audio, language="en-US")
+        except sr.UnknownValueError:
+            print("Could not understand audio")
+            user_input = "*they mutter too quietly to hear*"
+        except sr.RequestError as e:
+            print("Could not request results from Google Speech Recognition service; {0}".format(e))
+            user_input = "*unintelligible sounds come from human*"
+        print("Human: " + user_input)
+        return user_input
+    elif inputType == 2:
+        user_input = input("Human: ")
+        return user_input
 
 
-#Start new convo in the history
+
+
+# Save out
 with open("history.txt", "a") as file:
-        # Write the string to a new line in the file
+
         file.write("\nNEW CONVO STARTED WITH AI TYPE " + str(aiType) + "\n")
 
-historyFile = f"{aiType}history.txt"
+historyFile = f"{aiTypeName}history.txt"
 history = []
 while True:
-    #Check what input type is being used and call it
-    if inputType == 1:
-        user_input = get_input()
-    elif inputType == 2:
-        user_input = get_input_debug()
+    user_input = get_input()
     
     
     
     prompt = backstory + f"Human: {user_input}\n{aiTitle}:"
-    #Generate response and append to the history list
+
     response = generate_response(prompt, history)
     history.append(prompt)
     history.append(response)
     
-    #Save users input and the AI's response to the history
     with open(historyFile, "a") as file:
         file.write("User " + current_time + " : " + user_input + "\n")
         file.write("AI " + current_time + " : " + response + "\n")
     
-    #Check to see if the response contains any of the keywords to run events and remove those from the final result
     pr.special_instructions(response)
     response = pr.clear_substrings(response)
 
-    #Change CMD printing based off of the AI type
     if aiType == 1:
         print("AI: " + response + "\n")    
     elif aiType == 2 or aiType == 3:
         print("Human 2: " + response + "\n")    
     
-    #Create the tts file, play it, then delete it
     ao.speak_response(response)
     playsound('recentoutput.mp3')
     os.remove("recentoutput.mp3")
     
-    #Check to see if the convo should end
     if "end of conversation" in response.lower():
         exit()
