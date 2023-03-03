@@ -120,14 +120,14 @@ def get_input():
         return user_input
 
 
-
+historyFile = f"{aiTypeName}history.txt"
 
 # Save out
-with open("history.txt", "a") as file:
+with open(historyFile, "a") as file:
 
-        file.write(current_time + "\nNEW CONVO STARTED WITH AI TYPE " + str(aiTypeName) + "\n")
+        file.write("\n" + current_time + "NEW CONVO STARTED WITH AI TYPE " + aiTypeName.toUpperCase() + "\n")
 
-historyFile = f"{aiTypeName}history.txt"
+
 history = []
 while True:
     user_input = get_input()
