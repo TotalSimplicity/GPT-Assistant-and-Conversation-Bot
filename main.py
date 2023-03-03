@@ -60,6 +60,7 @@ else:
 
 
 
+aiTypeName = aiType
 
 if aiType.lower() == "assistant":
     aiType = 1
@@ -78,7 +79,6 @@ else:
     time.sleep(2)
     exit()
 
-aiTypeName = aiType
 
 if aiType == 1:
     aiTitle = "AI"
