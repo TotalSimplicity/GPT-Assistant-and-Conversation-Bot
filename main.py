@@ -81,9 +81,9 @@ else:
 
 
 if aiType == 1:
-    aiTitle = "AI"
+    aiTitle = "You"
 elif aiType == 2 or aiType == 3:
-    aiTitle = "Human 2"
+    aiTitle = "You"
 
 def generate_response(prompt, history=[]):
     prompt_with_history = f"\n".join(history + [prompt])
@@ -149,9 +149,9 @@ while True:
     response = pr.clear_substrings(response)
 
     if aiType == 1:
-        print("AI: " + response + "\n")    
+        print("AI: " + response)    
     elif aiType == 2 or aiType == 3:
-        print("Human 2: " + response + "\n")    
+        print("Human 2: " + response)    
     
     ao.speak_response(response)
     playsound('recentoutput.mp3')
