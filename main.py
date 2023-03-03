@@ -55,7 +55,7 @@ else:
     print("No arguments found, please start with flags of either \"nogui\" or \"gui\"")
     exit()
 
-aiTypeName = aiType
+
 
 
 
@@ -78,6 +78,7 @@ else:
     time.sleep(2)
     exit()
 
+aiTypeName = aiType
 
 if aiType == 1:
     aiTitle = "AI"
