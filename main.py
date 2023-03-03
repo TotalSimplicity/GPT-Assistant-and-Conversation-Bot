@@ -46,7 +46,7 @@ elif arguone == "nogui":
         
     else:
         aiType = input("Pick an AI type, Assistant, Conversationalist, or Debatething\n")
-        if aiType.lower() != "assistant" and aiType.lower() != "assistant" and aiType.lower() != "assistant":
+        if aiType.lower() != "assistant" and aiType.lower() != "conversationalist" and aiType.lower() != "debatething":
             print("Error, that is not a valid AI type.")
             exit()
         if argutwo == "text":
@@ -125,7 +125,7 @@ historyFile = f"{aiTypeName}history.txt"
 # Save out
 with open(historyFile, "a") as file:
 
-        file.write("\n" + current_time + "NEW CONVO STARTED WITH AI TYPE " + aiTypeName.toUpperCase() + "\n")
+        file.write("\n" + current_time + "NEW CONVO STARTED WITH AI TYPE " + aiTypeName + "\n")
 
 
 history = []
