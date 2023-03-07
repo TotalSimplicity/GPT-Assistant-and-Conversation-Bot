@@ -26,12 +26,14 @@ try:
     argutwo = sys.argv[2]
 except IndexError:
     aitype = "undefined"
-'''
-# Check arguments and set variables
-if arguone == "gui" and argutwo is not None:
-    print("The argument \"gui\" does not require any other arguments")
-    exit()
-'''
+
+try:
+    if arguone == "gui" and argutwo is not None:
+        print("The argument \"gui\" does not require any other arguments")
+        exit()
+except NameError:
+    print("No argument 2, continuing.....")
+
 if arguone == "gui":
     import gui
     aiType = gui.aiChoice
