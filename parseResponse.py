@@ -5,6 +5,8 @@ import secrets
 chrome_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
 end = "False"
 
+substrings_to_clear = ["*browser*", "*Browser*", "*music leo*", "*Music Leo*", "*music Leo*", "*Music Random*", "*music random*", "*music stop*", "*Music Stop*", "*time*", "*Time*"]
+
 def special_instructions(response):
     if "*browser*" in response.lower():
         print("Opening browser....")
@@ -24,17 +26,10 @@ def special_instructions(response):
         print("Time is disabled")
 
 def clear_substrings(response):
-    newResponse = response.replace("*browser*", "")
-    newResponse = newResponse.replace("*Browser*", "")
-    newResponse = newResponse.replace("*music leo*", "")
-    newResponse = newResponse.replace("*Music Leo*", "")
-    newResponse = newResponse.replace("*music Leo*", "")
-    newResponse = newResponse.replace("*Music Random*", "")
-    newResponse = newResponse.replace("*music random*", "")
-    newResponse = newResponse.replace("*music stop*", "")
-    newResponse = newResponse.replace("*Music Stop*", "")
-    newResponse = newResponse.replace("*time*", "")
-    newResponse = newResponse.replace("*Time*", "")
+    
+    newResponse = response
+    for substring in substrings_to_clear:
+        newResponse = newResponse.replace(substring, "")
     return newResponse
 '''
 def check_end(response):
