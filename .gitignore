@@ -1,6 +1,7 @@
 # Custom things
 *history.txt
 .cache
+*.mp3
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
